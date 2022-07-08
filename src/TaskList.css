@@ -1,0 +1,29 @@
+.Task-Container{
+    display: flex;
+    background-color: white;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-style: solid;
+    word-break: break-all;
+}
+.Button-Container{
+    margin-left: auto;
+}
+.Top-List{
+    border-style: solid;
+    background-color:salmon
+}
+.Bottom-List{
+    border-style: solid;
+    background-color:blue
+}
+.DoneTask-Container{
+    background-color:white ;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-style: solid;
+}
+.li{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 100px;
+}
