@@ -1,11 +1,17 @@
 //import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import TaskInput from './TaskInput';
+import DisplayView from './DisplayTask';
+import TodoInput from './TodoInput';
 function App() {
   return(
-    <TaskInput/>
+    <div>
+      <TodoInput/>
+      <DisplayView/>
+    </div>
   )
 }
+
 
 export default App;
 

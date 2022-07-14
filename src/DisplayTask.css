@@ -1,0 +1,8 @@
+.Task-Container-done{
+    background-color: aquamarine;
+    text-decoration: line-through;
+    border-style: dotted;
+}
+.Task-Container-undone{
+    background-color: white;
+}
