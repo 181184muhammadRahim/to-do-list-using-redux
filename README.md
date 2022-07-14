@@ -1,3 +1,6 @@
+# To-do-list-App using React redux
+This is a simple To-do-list-App Developed in react using redux and react-redux. It uses local Storage to perist data
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
