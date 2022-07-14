@@ -1,4 +1,26 @@
 import {createStore} from "redux"
+
+const loadState=()=>{
+  try{
+    const JSONstate=localStorage.getItem('state');
+    if(JSONstate===null){
+      return undefined
+    }
+    return JSON.parse(JSONstate);
+
+  }catch(error){
+    console.log(error);;
+  }
+}
+
+const saveState=(state)=>{
+  try {
+    const serialState=JSON.stringify(state);
+    localStorage.setItem('state',serialState)
+  } catch (error) {
+    console.log(error);
+  }
+}
 const TaskReducer=(state=[],action)=>{
     switch (action.type) {
       case "ADD_TODO":
@@ -37,5 +59,12 @@ const TaskReducer=(state=[],action)=>{
         return state
     }
   }
-  const Appstore=createStore(TaskReducer)
+  const persistedState=loadState()
+  const Appstore=createStore(TaskReducer,persistedState)
+  Appstore.subscribe(()=>{
+    saveState(Appstore.getState())
+
+
+  })
+
   export default Appstore;
