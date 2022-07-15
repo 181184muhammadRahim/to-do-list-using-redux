@@ -1,40 +1,11 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import './DisplayTask.css'
 
-const mapStateToTaskDisplayProps=(state)=>{
-    return{
-        value:state
-    }
-}
-const mapDispatchToTaskDisplayProps=(dispatch)=>{
-    return{ onDoneTaskClicked:(id)=>{
-        dispatch({
-            type:"DONE_TASK",
-            id
-        })
-    },
-    onDeleteTaskClicked:(id)=>{
-        dispatch({
-            type:"DELETE_TASK",
-            id
-        })
-    },
-    onEditTaskClicked:(id,text)=>{
-        if(text===""){
-            alert("Input field is empty")
-        }else{
-            dispatch({
-                type:"EDIT_TASK",
-                id,
-                text
-            })
-        }
-    }
-    }
-}
 
-let DisplayTask=({value,onDoneTaskClicked,onDeleteTaskClicked,onEditTaskClicked})=>{
+let DisplayTask=()=>{
+    const value= useSelector((state)=>state)
+    const dispatch=useDispatch()
     let textInput=[]
     console.log(value)
     return(
@@ -46,22 +17,20 @@ let DisplayTask=({value,onDoneTaskClicked,onDeleteTaskClicked,onEditTaskClicked}
                         return(
                             <div className="Task-Container-done" key={i}>
                             <li>{element.content}</li>
-                            <button onClick={()=>{onDoneTaskClicked(element.id)}}>UnDone Task</button>
-                            <button onClick={()=>{onDeleteTaskClicked(element.id)}}>Delete Task</button>
+                            <button onClick={()=>{dispatch({type:"DONE_TASK",id:element.id})}}>UnDone Task</button>
+                            <button onClick={()=>{dispatch({type:"DELETE_TASK",id:element.id})}}>Delete Task</button>
                             </div>
                         )
                     }else{
                         return(
                         <div className="Task-Container-undone" key={i}>
                         <li>{element.content}</li>
-                        <button onClick={()=>{onDoneTaskClicked(element.id)}}>Done Task</button>
-                        <button onClick={()=>{onDeleteTaskClicked(element.id)}}>Delete Task</button>
+                        <button onClick={()=>{dispatch({type:"DONE_TASK",id:element.id})}}>Done Task</button>
+                        <button onClick={()=>{dispatch({type:"DELETE_TASK",id:element.id})}}>Delete Task</button>
                         <input ref={node=>{
                                 textInput.push(node);
                             }}/>
-                        <button onClick={()=>{
-                                onEditTaskClicked(element.id,textInput[i].value) 
-                                textInput[i].value=""}}>Edit Task</button>
+                        <button onClick={()=>{dispatch({type:"EDIT_TASK",id:element.id,text:textInput[i].value})}}>Edit Task</button>
 
                         </div>
                         )
@@ -73,9 +42,5 @@ let DisplayTask=({value,onDoneTaskClicked,onDeleteTaskClicked,onEditTaskClicked}
         </ol>
     )
 }
-const DisplayView=connect(
-    mapStateToTaskDisplayProps,
-    mapDispatchToTaskDisplayProps
-)(DisplayTask)
 
-export default DisplayView;
+export default DisplayTask;
